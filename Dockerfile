@@ -13,6 +13,11 @@ RUN set -ex; \
 		libedit-dev \
 		libpspell-dev \
 		curl \
+		wget \
+		less \
+		git \
+		subversion \
+		sudo \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
@@ -45,10 +50,8 @@ RUN set -ex; \
     rm /tmp/composer-setup.php && \
     true
 
-WORKDIR /app
-
 RUN set -ex; \
-	chown www-data /app && \
-	chown www-data /var/www
+	chown www-data /var/www && \
+	sudo -u www-data wp package install aaemnnosttv/wp-cli-dotenv-command
 
-USER www-data
+WORKDIR /app
