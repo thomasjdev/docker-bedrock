@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.2-fpm
 
 # install the PHP extensions we need
 RUN set -ex; \
@@ -22,7 +22,7 @@ RUN set -ex; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
 	docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr; \
-	docker-php-ext-install gd mysqli opcache zip xml xmlrpc mcrypt json readline exif gettext posix pspell iconv
+	docker-php-ext-install gd mysqli opcache zip xml xmlrpc json readline exif gettext posix pspell iconv
 # TODO consider removing the *-dev deps and only keeping the necessary lib* packages
 
 # set recommended PHP.ini settings
@@ -36,7 +36,7 @@ RUN { \
 		echo 'opcache.enable_cli=1'; \
         echo 'upload_max_filesize = 64M'; \
         echo 'post_max_size = 64M'; \
-        echo 'memory_limit = 256M'; \
+        echo 'memory_limit = 512M'; \
         echo 'date.timezone = "America/Los_Angeles"'; \
 	} > /usr/local/etc/php/conf.d/custom.ini
 
